@@ -378,8 +378,11 @@ const createParticle = () => {
     particlesContainer.appendChild(particle);
 };
 
-// Create 50 particles
-for (let i = 0; i < 50; i++) {
+// Create particles (less on mobile for performance)
+const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+const particleCount = isMobileDevice ? 15 : 50;
+
+for (let i = 0; i < particleCount; i++) {
     createParticle();
 }
 
@@ -404,19 +407,24 @@ const animateParallax = () => {
     currentX += diffX * 0.1;
     currentY += diffY * 0.1;
 
-    // Apply parallax to particles
-    const particles = document.querySelectorAll('.particle');
-    particles.forEach((particle, index) => {
-        const speed = (index % 3 + 1) * 0.01;
-        const x = (currentX - window.innerWidth / 2) * speed;
-        const y = (currentY - window.innerHeight / 2) * speed;
-        particle.style.transform = `translate(${x}px, ${y}px)`;
-    });
+    // Apply parallax to particles (skip on mobile for performance)
+    if (!isMobileDevice) {
+        const particles = document.querySelectorAll('.particle');
+        particles.forEach((particle, index) => {
+            const speed = (index % 3 + 1) * 0.01;
+            const x = (currentX - window.innerWidth / 2) * speed;
+            const y = (currentY - window.innerHeight / 2) * speed;
+            particle.style.transform = `translate(${x}px, ${y}px)`;
+        });
+    }
 
     requestAnimationFrame(animateParallax);
 };
 
-animateParallax();
+// Only run parallax on desktop
+if (!isMobileDevice) {
+    animateParallax();
+}
 
 // ================================
 // CARD TILT EFFECT
