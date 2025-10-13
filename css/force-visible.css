@@ -1,0 +1,238 @@
+/* ================================
+   FORCE EVERYTHING VISIBLE - DEBUG
+   ================================ */
+
+/* Force sections to be visible */
+.experience.section,
+.skills.section,
+.projects.section,
+.certifications.section {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    background: #0a0a0a !important;
+    padding: 100px 0 !important;
+}
+
+/* Force container to be visible */
+.experience .container,
+.skills .container,
+.projects .container,
+.certifications .container {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+    padding: 0 2rem !important;
+}
+
+/* Force section title visible - SIMPLE LAYOUT */
+.section-title {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    font-size: clamp(2rem, 5vw, 3rem) !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin-bottom: 3rem !important;
+    padding-bottom: 1rem !important;
+    width: 100% !important;
+    text-align: left !important;
+    line-height: 1.2 !important;
+    border-bottom: 2px solid rgba(0, 217, 255, 0.3) !important;
+}
+
+.title-number {
+    display: inline !important;
+    color: #00D9FF !important;
+    margin-right: 0.75rem !important;
+    font-size: 0.8em !important;
+}
+
+.title-line {
+    display: none !important;
+}
+
+/* Force timeline visible */
+.timeline {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+}
+
+/* Force timeline items visible */
+.timeline-item {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    margin-bottom: 3rem !important;
+    width: 100% !important;
+}
+
+/* Force cards visible with professional styling */
+.timeline-content.card,
+.skill-category.card,
+.project-card.card,
+.certification-card.card {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(0, 217, 255, 0.3) !important;
+    border-radius: 16px !important;
+    padding: 2rem !important;
+    margin: 1rem 0 !important;
+    min-height: 200px !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    transition: all 0.3s ease !important;
+}
+
+.timeline-content.card:hover,
+.skill-category.card:hover,
+.project-card.card:hover,
+.certification-card.card:hover {
+    transform: translateY(-5px) !important;
+    border-color: #00D9FF !important;
+    box-shadow: 0 10px 40px rgba(0, 217, 255, 0.3) !important;
+}
+
+/* Force all text elements visible */
+.experience-header,
+.experience-info,
+.experience-description,
+.job-title,
+.company-name,
+.achievements-list,
+.tech-stack {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #ffffff !important;
+}
+
+/* Force company logo visible */
+.company-logo {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100px !important;
+    height: 100px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(0, 217, 255, 0.2) !important;
+    border-radius: 12px !important;
+    padding: 1rem !important;
+    margin-bottom: 1rem !important;
+    transition: all 0.3s ease !important;
+}
+
+.company-logo:hover {
+    transform: scale(1.05) rotate(-2deg) !important;
+    box-shadow: 0 8px 30px rgba(0, 217, 255, 0.4) !important;
+    border-color: #00D9FF !important;
+}
+
+.company-logo img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    opacity: 1 !important;
+}
+
+/* Force text visible */
+h1, h2, h3, h4, p, li, span, div {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Skills grid */
+.skills-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 2rem !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Projects grid */
+.projects-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 2rem !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Certifications grid */
+.certifications-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 2rem !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Achievements grid */
+.achievements-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 2rem !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1.75rem !important;
+        margin-bottom: 2rem !important;
+    }
+
+    .title-number {
+        font-size: 1.25rem !important;
+        display: block !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .skills-grid,
+    .projects-grid,
+    .certifications-grid,
+    .achievements-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .experience.section,
+    .skills.section,
+    .projects.section,
+    .certifications.section {
+        padding: 50px 0 !important;
+    }
+
+    .timeline-content.card {
+        padding: 1.5rem !important;
+    }
+
+    .company-logo {
+        width: 80px !important;
+        height: 80px !important;
+    }
+}
+
+/* Tablet responsive */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .section-title {
+        font-size: 2.25rem !important;
+    }
+
+    .achievements-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .certifications-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}

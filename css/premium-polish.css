@@ -1,0 +1,352 @@
+/* ================================
+   PREMIUM SENIOR LEVEL POLISH
+   Final touches for professional impact
+   ================================ */
+
+/* Fix Profile Photo - Remove blue overlay */
+.about-image .image-overlay {
+    display: none !important;
+    opacity: 0 !important;
+}
+
+.profile-img {
+    filter: none !important;
+    border: 2px solid rgba(0, 217, 255, 0.3) !important;
+}
+
+.image-wrapper:hover .profile-img {
+    filter: none !important;
+    border-color: #00D9FF !important;
+    box-shadow: 0 0 30px rgba(0, 217, 255, 0.5) !important;
+}
+
+/* Enhanced Typography - Senior Level */
+body {
+    letter-spacing: -0.01em !important;
+}
+
+h1, h2, h3 {
+    letter-spacing: -0.02em !important;
+}
+
+.hero-title {
+    font-weight: 800 !important;
+    text-shadow: 0 0 40px rgba(0, 217, 255, 0.2) !important;
+}
+
+.job-title {
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+}
+
+/* Premium Card Styling */
+.card {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+.card:hover {
+    box-shadow: 0 8px 40px rgba(0, 217, 255, 0.2),
+                0 0 60px rgba(0, 217, 255, 0.1) !important;
+}
+
+/* Enhanced Tech Badges */
+.tech-badge {
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    font-size: 0.75rem !important;
+}
+
+/* Premium Stats */
+.stat-number {
+    font-weight: 800 !important;
+    background: var(--accent-gradient) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
+/* Enhanced Achievement Cards */
+.achievement-icon {
+    background: rgba(0, 217, 255, 0.1) !important;
+}
+
+.achievement-number {
+    font-weight: 800 !important;
+    background: var(--accent-gradient) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
+/* Premium Progress Bars */
+.progress-bar {
+    background: var(--accent-gradient) !important;
+    box-shadow: 0 2px 10px rgba(0, 217, 255, 0.4) !important;
+}
+
+/* Enhanced Buttons */
+.btn {
+    font-weight: 600 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    font-size: 0.875rem !important;
+}
+
+.btn-primary {
+    background: var(--accent-gradient) !important;
+    box-shadow: 0 4px 20px rgba(0, 217, 255, 0.4) !important;
+}
+
+.btn-primary:hover {
+    box-shadow: 0 8px 30px rgba(0, 217, 255, 0.6) !important;
+}
+
+/* Premium Social Links */
+.social-link {
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+}
+
+.social-link:hover {
+    background: var(--accent-gradient) !important;
+}
+
+/* Enhanced Hero Section */
+.hero-description {
+    font-size: 1.125rem !important;
+    line-height: 1.8 !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Premium Company Logos */
+.company-logo {
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+}
+
+/* Enhanced Achievement List */
+.achievements-list li {
+    padding-left: 0.5rem !important;
+}
+
+.achievements-list li strong {
+    color: #00D9FF !important;
+    font-weight: 700 !important;
+}
+
+/* Premium Project Cards */
+.project-icon {
+    background: rgba(0, 217, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+.project-badge {
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    font-size: 0.7rem !important;
+}
+
+/* Enhanced Certification Cards */
+.cert-year {
+    background: var(--accent-gradient) !important;
+    font-weight: 700 !important;
+}
+
+.cert-link {
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    font-size: 0.8rem !important;
+}
+
+/* Premium Contact Form */
+.form-group input,
+.form-group textarea {
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #00D9FF !important;
+    box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.2) !important;
+}
+
+/* Enhanced Navbar */
+.navbar.scrolled {
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+.nav-link {
+    font-weight: 500 !important;
+    letter-spacing: 0.3px !important;
+}
+
+/* Premium Footer */
+.footer {
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+}
+
+/* Smooth Scrolling Enhancement */
+html {
+    scroll-behavior: smooth !important;
+}
+
+/* Enhanced Preloader */
+.loader-circle {
+    border-width: 4px !important;
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.3) !important;
+}
+
+/* Premium Scroll Indicator */
+.mouse {
+    backdrop-filter: blur(10px) !important;
+    background: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* Enhanced Section Backgrounds */
+.section {
+    position: relative !important;
+}
+
+.section::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: radial-gradient(ellipse at top, rgba(0, 217, 255, 0.02) 0%, transparent 70%) !important;
+    pointer-events: none !important;
+    z-index: 0 !important;
+}
+
+.section .container {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Premium Skill Icons */
+.skill-icon {
+    filter: drop-shadow(0 2px 8px rgba(0, 217, 255, 0.3)) !important;
+}
+
+/* Enhanced About Stats */
+.about-stats {
+    gap: 2rem !important;
+}
+
+/* Premium Timeline Content */
+.timeline-content.card {
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+}
+
+/* Enhanced Job Period/Location */
+.job-period,
+.job-location {
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+}
+
+/* Premium Category Headers */
+.category-icon {
+    filter: drop-shadow(0 2px 8px rgba(0, 217, 255, 0.4)) !important;
+}
+
+.category-title {
+    font-weight: 700 !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* Enhanced Contact Methods */
+.contact-method {
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+}
+
+.method-icon {
+    background: var(--accent-gradient) !important;
+}
+
+/* Premium Theme Toggle */
+.theme-toggle {
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+}
+
+.theme-toggle:hover {
+    background: rgba(0, 217, 255, 0.1) !important;
+    border-color: #00D9FF !important;
+}
+
+/* Enhanced Scroll to Top */
+.scroll-top {
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    box-shadow: 0 4px 20px rgba(0, 217, 255, 0.4) !important;
+}
+
+.scroll-top:hover {
+    box-shadow: 0 8px 30px rgba(0, 217, 255, 0.6) !important;
+}
+
+/* Premium Mobile Optimizations */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2rem !important;
+    }
+
+    .hero-description {
+        font-size: 1rem !important;
+    }
+
+    .btn {
+        padding: 0.875rem 1.75rem !important;
+    }
+
+    .card {
+        padding: 1.5rem !important;
+    }
+
+    .section {
+        padding: 60px 0 !important;
+    }
+}
+
+/* Ultra-premium text rendering */
+* {
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    text-rendering: optimizeLegibility !important;
+}
+
+/* Final polish - subtle animations */
+.card,
+.btn,
+.social-link,
+.tech-badge,
+.company-logo,
+.stat-card,
+.achievement-card,
+.project-card,
+.certification-card {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+/* Premium focus states */
+*:focus-visible {
+    outline: 2px solid #00D9FF !important;
+    outline-offset: 2px !important;
+}
+
+/* Enhanced selection */
+::selection {
+    background-color: rgba(0, 217, 255, 0.3) !important;
+    color: #ffffff !important;
+}
