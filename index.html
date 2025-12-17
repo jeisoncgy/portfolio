@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeison Moreno | Code + Finance</title>
+    <meta name="description" content="Senior Financial Analyst especializado en Code + Finance. Transformando datos en decisiones estratégicas.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.3/umd/index.min.js"></script>
+
+    <!-- Three.js for 3D effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
+
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-text">
+                <span class="loader-letter">Y</span>
+                <span class="loader-letter">E</span>
+                <span class="loader-letter">I</span>
+                <span class="loader-letter">S</span>
+                <span class="loader-letter">O</span>
+                <span class="loader-letter">N</span>
+            </div>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+            <div class="loader-percent">0%</div>
+        </div>
+    </div>
+
+    <!-- Particle Background -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-logo">
+            <a href="#hero" class="logo-link">
+                <span class="logo-bracket">{</span>
+                <span class="logo-text">YM</span>
+                <span class="logo-bracket">}</span>
+            </a>
+        </div>
+        <div class="nav-menu">
+            <a href="#about" class="nav-link" data-text="Sobre Mí">Sobre Mí</a>
+            <a href="#skills" class="nav-link" data-text="Skills">Skills</a>
+            <a href="#certificates" class="nav-link" data-text="Certificados">Certificados</a>
+            <a href="#contact" class="nav-link" data-text="Contacto">Contacto</a>
+        </div>
+        <div class="nav-social">
+            <a href="https://www.linkedin.com/in/yeison-moreno-rivera-375833b1/" target="_blank" class="social-link linkedin" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+        </div>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-content">
+            <a href="#about" class="mobile-link">Sobre Mí</a>
+            <a href="#skills" class="mobile-link">Skills</a>
+            <a href="#certificates" class="mobile-link">Certificados</a>
+            <a href="#contact" class="mobile-link">Contacto</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <div class="hero-gradient"></div>
+            <div class="hero-grid"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-tag">
+                <span class="tag-dot"></span>
+                <span class="tag-text">Disponible para nuevos proyectos</span>
+            </div>
+            <h1 class="hero-title">
+                <span class="title-line">
+                    <span class="title-word">YEISON</span>
+                </span>
+                <span class="title-line">
+                    <span class="title-word gradient-text">MORENO</span>
+                </span>
+            </h1>
+            <div class="hero-subtitle">
+                <div class="subtitle-wrapper">
+                    <span class="code-symbol">&lt;</span>
+                    <span class="rotating-text" id="rotating-text">
+                        <span class="rotate-word active">Code + Finance</span>
+                        <span class="rotate-word">Data Analytics</span>
+                        <span class="rotate-word">Financial Modeling</span>
+                        <span class="rotate-word">Python Developer</span>
+                    </span>
+                    <span class="code-symbol">/&gt;</span>
+                </div>
+            </div>
+            <p class="hero-description">
+                Transformando <span class="highlight">datos financieros</span> en
+                <span class="highlight">decisiones estratégicas</span> mediante código y análisis avanzado.
+            </p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn btn-primary">
+                    <span class="btn-text">Contactar</span>
+                    <span class="btn-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </span>
+                </a>
+                <a href="#certificates" class="btn btn-secondary">
+                    <span class="btn-text">Ver Certificados</span>
+                </a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <div class="scroll-indicator">
+                <div class="scroll-line"></div>
+            </div>
+            <span class="scroll-text">Scroll</span>
+        </div>
+        <div class="hero-float-elements">
+            <div class="float-element float-1">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="float-element float-2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div class="float-element float-3">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2 class="section-title split-text">Sobre Mí</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-image">
+                    <div class="image-wrapper">
+                        <div class="image-frame"></div>
+                        <div class="image-placeholder">
+                            <span class="placeholder-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
+                            </span>
+                            <span class="placeholder-text">YM</span>
+                        </div>
+                        <div class="image-decoration"></div>
+                    </div>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-number" data-value="5">0</span>
+                            <span class="stat-label">Años de Experiencia</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-value="9">0</span>
+                            <span class="stat-label">Certificaciones</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-value="50">0</span>
+                            <span class="stat-label">Proyectos</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <div class="about-intro">
+                        <p class="intro-text">
+                            Soy un <strong>Senior Financial Analyst</strong> apasionado por la intersección entre
+                            <span class="text-gradient">finanzas y tecnología</span>. Mi enfoque único combina
+                            análisis financiero tradicional con programación avanzada para crear soluciones
+                            innovadoras.
+                        </p>
+                    </div>
+                    <div class="about-details">
+                        <div class="detail-block">
+                            <h3 class="detail-title">
+                                <span class="detail-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+                                </span>
+                                Code
+                            </h3>
+                            <p>Python, SQL, VBA, y herramientas de automatización para optimizar procesos financieros y análisis de datos a escala.</p>
+                        </div>
+                        <div class="detail-block">
+                            <h3 class="detail-title">
+                                <span class="detail-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                </span>
+                                Finance
+                            </h3>
+                            <p>Modelado financiero, análisis de inversiones, forecasting y reportería ejecutiva para la toma de decisiones estratégicas.</p>
+                        </div>
+                    </div>
+                    <div class="about-quote">
+                        <blockquote>
+                            "Los datos cuentan historias. Mi trabajo es traducirlas en oportunidades de negocio."
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2 class="section-title split-text">Skills & Expertise</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="skills-content">
+                <div class="skills-category">
+                    <h3 class="category-title">
+                        <span class="category-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                        </span>
+                        Programming
+                    </h3>
+                    <div class="skills-grid">
+                        <div class="skill-card" data-skill="python">
+                            <div class="skill-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"/></svg>
+                            </div>
+                            <span class="skill-name">Python</span>
+                            <div class="skill-level">
+                                <div class="level-bar" data-level="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card" data-skill="sql">
+                            <div class="skill-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C7.58 3 4 4.79 4 7s3.58 4 8 4 8-1.79 8-4-3.58-4-8-4zM4 9v3c0 2.21 3.58 4 8 4s8-1.79 8-4V9c0 2.21-3.58 4-8 4s-8-1.79-8-4zm0 5v3c0 2.21 3.58 4 8 4s8-1.79 8-4v-3c0 2.21-3.58 4-8 4s-8-1.79-8-4z"/></svg>
+                            </div>
+                            <span class="skill-name">SQL</span>
+                            <div class="skill-level">
+                                <div class="level-bar" data-level="95"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card" data-skill="vba">
+                            <div class="skill-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.17 3.25Q21.5 3.25 21.76 3.5 22 3.74 22 4.08V19.92Q22 20.26 21.76 20.5 21.5 20.75 21.17 20.75H2.83Q2.5 20.75 2.24 20.5 2 20.26 2 19.92V4.08Q2 3.74 2.24 3.5 2.5 3.25 2.83 3.25H21.17M7.5 17.5L4 6.5H5.97L8.35 14.59 10.73 6.5H12.67L9.17 17.5H7.5M14.17 17.5V6.5H18.59Q19.54 6.5 20.14 7.1 20.75 7.71 20.75 8.65V10.13Q20.75 11.08 20.14 11.68 19.54 12.29 18.59 12.29L20.75 17.5H18.79L16.79 12.57H16.08V17.5H14.17M16.08 10.73H18.3Q18.5 10.73 18.63 10.59 18.75 10.45 18.75 10.24V8.54Q18.75 8.34 18.63 8.2 18.5 8.05 18.3 8.05H16.08V10.73Z"/></svg>
+                            </div>
+                            <span class="skill-name">VBA</span>
+                            <div class="skill-level">
+                                <div class="level-bar" data-level="85"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skills-category">
+                    <h3 class="category-title">
+                        <span class="category-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4h-4z"/></svg>
+                        </span>
+                        Finance & Analytics
+                    </h3>
+                    <div class="skills-grid">
+                        <div class="skill-card" data-skill="excel">
+                            <div class="skill-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.17 3H7.83A1.83 1.83 0 006 4.83v2.34H2.83A1.83 1.83 0 001 9v6a1.83 1.83 0 001.83 1.83H6v2.34A1.83 1.83 0 007.83 21h13.34A1.83 1.83 0 0023 19.17V4.83A1.83 1.83 0 0021.17 3zM8 18H6.5v-2H8zm0-4H6.5v-2H8zm0-4H6.5V8H8zm6.5 8h-4v-2h4zm0-4h-4v-2h4zm0-4h-4V8h4zm6 8H18v-2h2.5zm0-4H18v-2h2.5zm0-4H18V8h2.5zM5.5 14.5l-1.73-3h1.18l1.08 2.04 1.08-2.04h1.18l-1.73 3 1.88 3.25H7.23l-1.15-2.21-1.15 2.21H3.75z"/></svg>
+                            </div>
+                            <span class="skill-name">Excel Avanzado</span>
+                            <div class="skill-level">
+                                <div class="level-bar" data-level="95"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card" data-skill="powerbi">
+                            <div class="skill-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm8 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm-4-6a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm0 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/></svg>
+                            </div>
+                            <span class="skill-name">Power BI</span>
+                            <div class="skill-level">
+                                <div class="level-bar" data-level="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card" data-skill="databricks">
+                            <div class="skill-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                            </div>
+                            <span class="skill-name">Databricks</span>
+                            <div class="skill-level">
+                                <div class="level-bar" data-level="85"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skills-category">
+                    <h3 class="category-title">
+                        <span class="category-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+                        </span>
+                        Data & AI
+                    </h3>
+                    <div class="skills-grid">
+                        <div class="skill-card" data-skill="chatgpt">
+                            <div class="skill-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.8956zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg>
+                            </div>
+                            <span class="skill-name">ChatGPT / AI</span>
+                            <div class="skill-level">
+                                <div class="level-bar" data-level="88"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card" data-skill="databases">
+                            <div class="skill-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.58 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4zm0 2c3.87 0 6 1.5 6 2s-2.13 2-6 2-6-1.5-6-2 2.13-2 6-2zm6 12c0 .5-2.13 2-6 2s-6-1.5-6-2v-2.23c1.61.78 3.72 1.23 6 1.23s4.39-.45 6-1.23V17zm0-5c0 .5-2.13 2-6 2s-6-1.5-6-2V9.77c1.61.78 3.72 1.23 6 1.23s4.39-.45 6-1.23V12z"/></svg>
+                            </div>
+                            <span class="skill-name">Bases de Datos</span>
+                            <div class="skill-level">
+                                <div class="level-bar" data-level="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card" data-skill="visualization">
+                            <div class="skill-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h2v8H3v-8zm4-6h2v14H7V7zm4-4h2v18h-2V3zm4 8h2v10h-2V11zm4 4h2v6h-2v-6z"/></svg>
+                            </div>
+                            <span class="skill-name">Data Visualization</span>
+                            <div class="skill-level">
+                                <div class="level-bar" data-level="92"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section class="certificates" id="certificates">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2 class="section-title split-text">Certificaciones</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="certificates-grid">
+                <!-- Python -->
+                <div class="cert-card" data-cert="python">
+                    <div class="cert-front">
+                        <div class="cert-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05z"/></svg>
+                        </div>
+                        <h3 class="cert-title">Python</h3>
+                        <p class="cert-issuer">Platzi</p>
+                        <div class="cert-badge">Verificado</div>
+                    </div>
+                    <div class="cert-back">
+                        <h4>Habilidades Adquiridas</h4>
+                        <ul class="cert-skills">
+                            <li>Programación orientada a objetos</li>
+                            <li>Estructuras de datos</li>
+                            <li>Automatización de procesos</li>
+                            <li>Análisis de datos con Python</li>
+                        </ul>
+                        <a href="CERTIFICADOS/diploma-python.pdf" target="_blank" class="cert-link">
+                            <span>Ver Certificado</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Databricks -->
+                <div class="cert-card" data-cert="databricks">
+                    <div class="cert-front">
+                        <div class="cert-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <h3 class="cert-title">Databricks</h3>
+                        <p class="cert-issuer">Databricks Academy</p>
+                        <div class="cert-badge">Verificado</div>
+                    </div>
+                    <div class="cert-back">
+                        <h4>Habilidades Adquiridas</h4>
+                        <ul class="cert-skills">
+                            <li>Apache Spark fundamentals</li>
+                            <li>Data Engineering workflows</li>
+                            <li>Delta Lake management</li>
+                            <li>Cloud data pipelines</li>
+                        </ul>
+                        <a href="CERTIFICADOS/diploma-databricks.pdf" target="_blank" class="cert-link">
+                            <span>Ver Certificado</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Databricks SQL -->
+                <div class="cert-card" data-cert="dbsql">
+                    <div class="cert-front">
+                        <div class="cert-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C7.58 3 4 4.79 4 7s3.58 4 8 4 8-1.79 8-4-3.58-4-8-4zM4 9v3c0 2.21 3.58 4 8 4s8-1.79 8-4V9c0 2.21-3.58 4-8 4s-8-1.79-8-4zm0 5v3c0 2.21 3.58 4 8 4s8-1.79 8-4v-3c0 2.21-3.58 4-8 4s-8-1.79-8-4z"/></svg>
+                        </div>
+                        <h3 class="cert-title">Databricks SQL</h3>
+                        <p class="cert-issuer">Databricks Academy</p>
+                        <div class="cert-badge">2024</div>
+                    </div>
+                    <div class="cert-back">
+                        <h4>Habilidades Adquiridas</h4>
+                        <ul class="cert-skills">
+                            <li>SQL Analytics avanzado</li>
+                            <li>Query optimization</li>
+                            <li>Data warehousing</li>
+                            <li>Dashboard creation</li>
+                        </ul>
+                        <a href="CERTIFICADOS/diploma-dbsql-2024.pdf" target="_blank" class="cert-link">
+                            <span>Ver Certificado</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Bases de Datos -->
+                <div class="cert-card" data-cert="databases">
+                    <div class="cert-front">
+                        <div class="cert-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.58 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4z"/></svg>
+                        </div>
+                        <h3 class="cert-title">Bases de Datos</h3>
+                        <p class="cert-issuer">Platzi</p>
+                        <div class="cert-badge">Verificado</div>
+                    </div>
+                    <div class="cert-back">
+                        <h4>Habilidades Adquiridas</h4>
+                        <ul class="cert-skills">
+                            <li>Diseño de bases de datos</li>
+                            <li>Normalización</li>
+                            <li>Queries complejos</li>
+                            <li>Optimización de consultas</li>
+                        </ul>
+                        <a href="CERTIFICADOS/diploma-bases-datos.pdf" target="_blank" class="cert-link">
+                            <span>Ver Certificado</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Excel Avanzado -->
+                <div class="cert-card" data-cert="excel">
+                    <div class="cert-front">
+                        <div class="cert-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.17 3H7.83A1.83 1.83 0 006 4.83v2.34H2.83A1.83 1.83 0 001 9v6a1.83 1.83 0 001.83 1.83H6v2.34A1.83 1.83 0 007.83 21h13.34A1.83 1.83 0 0023 19.17V4.83A1.83 1.83 0 0021.17 3z"/></svg>
+                        </div>
+                        <h3 class="cert-title">Excel Avanzado</h3>
+                        <p class="cert-issuer">Platzi</p>
+                        <div class="cert-badge">Verificado</div>
+                    </div>
+                    <div class="cert-back">
+                        <h4>Habilidades Adquiridas</h4>
+                        <ul class="cert-skills">
+                            <li>Funciones avanzadas</li>
+                            <li>Tablas dinámicas</li>
+                            <li>Macros y VBA</li>
+                            <li>Análisis de datos</li>
+                        </ul>
+                        <a href="CERTIFICADOS/diploma-excel-avanzado-datos.pdf" target="_blank" class="cert-link">
+                            <span>Ver Certificado</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ChatGPT -->
+                <div class="cert-card" data-cert="chatgpt">
+                    <div class="cert-front">
+                        <div class="cert-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729z"/></svg>
+                        </div>
+                        <h3 class="cert-title">ChatGPT</h3>
+                        <p class="cert-issuer">Platzi</p>
+                        <div class="cert-badge">2024</div>
+                    </div>
+                    <div class="cert-back">
+                        <h4>Habilidades Adquiridas</h4>
+                        <ul class="cert-skills">
+                            <li>Prompt engineering</li>
+                            <li>AI para productividad</li>
+                            <li>Automatización con AI</li>
+                            <li>Integración de APIs</li>
+                        </ul>
+                        <a href="CERTIFICADOS/diploma-chatgpt-2024.pdf" target="_blank" class="cert-link">
+                            <span>Ver Certificado</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Power BI -->
+                <div class="cert-card" data-cert="powerbi">
+                    <div class="cert-front">
+                        <div class="cert-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h2v8H3v-8zm4-6h2v14H7V7zm4-4h2v18h-2V3zm4 8h2v10h-2V11zm4 4h2v6h-2v-6z"/></svg>
+                        </div>
+                        <h3 class="cert-title">Visualización BI</h3>
+                        <p class="cert-issuer">Platzi</p>
+                        <div class="cert-badge">Verificado</div>
+                    </div>
+                    <div class="cert-back">
+                        <h4>Habilidades Adquiridas</h4>
+                        <ul class="cert-skills">
+                            <li>Dashboards interactivos</li>
+                            <li>Storytelling con datos</li>
+                            <li>KPIs y métricas</li>
+                            <li>Reportería ejecutiva</li>
+                        </ul>
+                        <a href="CERTIFICADOS/diploma-visualizacion-datos-bi.pdf" target="_blank" class="cert-link">
+                            <span>Ver Certificado</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Negociación B2B -->
+                <div class="cert-card" data-cert="b2b">
+                    <div class="cert-front">
+                        <div class="cert-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 4a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4h8zm-4 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm-4 9c0-2 4-3 4-3s4 1 4 3v1H8v-1z"/></svg>
+                        </div>
+                        <h3 class="cert-title">Negociación B2B</h3>
+                        <p class="cert-issuer">Platzi</p>
+                        <div class="cert-badge">Verificado</div>
+                    </div>
+                    <div class="cert-back">
+                        <h4>Habilidades Adquiridas</h4>
+                        <ul class="cert-skills">
+                            <li>Estrategias de negociación</li>
+                            <li>Comunicación efectiva</li>
+                            <li>Gestión de stakeholders</li>
+                            <li>Cierre de acuerdos</li>
+                        </ul>
+                        <a href="CERTIFICADOS/diploma-negociacion-b2b.pdf" target="_blank" class="cert-link">
+                            <span>Ver Certificado</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Databricks Certificate -->
+                <div class="cert-card" data-cert="databricks-cert">
+                    <div class="cert-front">
+                        <div class="cert-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <h3 class="cert-title">Databricks Certified</h3>
+                        <p class="cert-issuer">Databricks</p>
+                        <div class="cert-badge special">Premium</div>
+                    </div>
+                    <div class="cert-back">
+                        <h4>Habilidades Adquiridas</h4>
+                        <ul class="cert-skills">
+                            <li>Data Engineering Expert</li>
+                            <li>MLOps fundamentals</li>
+                            <li>Lakehouse architecture</li>
+                            <li>Enterprise solutions</li>
+                        </ul>
+                        <a href="CERTIFICADOS/certificado-1aec8e81-405a-4d76-892e-03ec044ad9fe-f4f071c5-c1f3-4813-a229-9e09a1a1d5e1.pdf" target="_blank" class="cert-link">
+                            <span>Ver Certificado</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2 class="section-title split-text">Contacto</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3 class="contact-heading">¿Listo para trabajar juntos?</h3>
+                    <p class="contact-text">
+                        Estoy siempre abierto a discutir nuevos proyectos, oportunidades creativas
+                        o formas de agregar valor a tu equipo.
+                    </p>
+                    <div class="contact-methods">
+                        <a href="mailto:jeisoncgy@gmail.com" class="contact-method">
+                            <div class="method-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            </div>
+                            <div class="method-details">
+                                <span class="method-label">Email</span>
+                                <span class="method-value">jeisoncgy@gmail.com</span>
+                            </div>
+                        </a>
+                        <a href="https://www.linkedin.com/in/yeison-moreno-rivera-375833b1/" target="_blank" class="contact-method">
+                            <div class="method-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            </div>
+                            <div class="method-details">
+                                <span class="method-label">LinkedIn</span>
+                                <span class="method-value">Yeison Moreno Rivera</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="contact-form" action="https://formspree.io/f/xpwzgkqr" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="name" id="name" required>
+                            <label for="name">Nombre</label>
+                            <div class="form-line"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" id="email" required>
+                            <label for="email">Email</label>
+                            <div class="form-line"></div>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" id="message" rows="4" required></textarea>
+                            <label for="message">Mensaje</label>
+                            <div class="form-line"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-submit">
+                            <span class="btn-text">Enviar Mensaje</span>
+                            <span class="btn-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-bracket">{</span>
+                    <span class="logo-text">YM</span>
+                    <span class="logo-bracket">}</span>
+                </div>
+                <p class="footer-text">Code + Finance | Transformando datos en decisiones</p>
+                <div class="footer-social">
+                    <a href="https://www.linkedin.com/in/yeison-moreno-rivera-375833b1/" target="_blank" class="footer-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                    <a href="mailto:jeisoncgy@gmail.com" class="footer-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Yeison Moreno. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/particles.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
