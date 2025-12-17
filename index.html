@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +19,9 @@
 
     <!-- Lenis Smooth Scroll -->
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+    <!-- SplitType for text animations -->
+    <script src="https://unpkg.com/split-type"></script>
 
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -66,12 +69,25 @@
             </a>
         </div>
         <div class="nav-menu">
-            <a href="#about" class="nav-link"><span data-text="Sobre Mí">Sobre Mí</span></a>
+            <a href="#about" class="nav-link"><span data-text="Sobre Mi">Sobre Mi</span></a>
             <a href="#projects" class="nav-link"><span data-text="Proyectos">Proyectos</span></a>
             <a href="#skills" class="nav-link"><span data-text="Skills">Skills</span></a>
             <a href="#certificates" class="nav-link"><span data-text="Certificados">Certificados</span></a>
         </div>
-        <div class="nav-cta">
+        <div class="nav-actions">
+            <!-- Theme Toggle -->
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <div class="theme-toggle-track">
+                    <svg class="theme-icon sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                    <svg class="theme-icon moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                    <div class="theme-toggle-thumb"></div>
+                </div>
+            </button>
             <a href="https://www.linkedin.com/in/yeison-moreno-rivera-375833b1/" target="_blank" class="nav-linkedin magnetic">
                 <span class="linkedin-pulse"></span>
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -89,17 +105,28 @@
     <div class="mobile-menu" id="mobile-menu">
         <div class="mobile-menu-bg"></div>
         <div class="mobile-menu-content">
-            <a href="#about" class="mobile-link" data-index="01">Sobre Mí</a>
+            <a href="#about" class="mobile-link" data-index="01">Sobre Mi</a>
             <a href="#projects" class="mobile-link" data-index="02">Proyectos</a>
             <a href="#skills" class="mobile-link" data-index="03">Skills</a>
             <a href="#certificates" class="mobile-link" data-index="04">Certificados</a>
             <a href="#contact" class="mobile-link" data-index="05">Contacto</a>
+            <div class="mobile-theme-toggle">
+                <button class="theme-toggle-mobile" id="theme-toggle-mobile">
+                    <span class="toggle-label">Tema</span>
+                    <div class="theme-toggle-track">
+                        <div class="theme-toggle-thumb"></div>
+                    </div>
+                </button>
+            </div>
             <a href="https://www.linkedin.com/in/yeison-moreno-rivera-375833b1/" target="_blank" class="mobile-linkedin">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                 LinkedIn
             </a>
         </div>
     </div>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scroll-progress"></div>
 
     <!-- Hero Section -->
     <section class="hero" id="hero">
@@ -119,7 +146,9 @@
             <div class="hero-badge">
                 <span class="badge-dot"></span>
                 <span class="badge-text">Open to new opportunities</span>
-                <span class="badge-arrow">→</span>
+                <span class="badge-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </span>
             </div>
 
             <div class="hero-title-wrapper">
@@ -132,7 +161,8 @@
                     </div>
                 </h1>
                 <div class="hero-title-decoration">
-                    <span class="decoration-year">©2025</span>
+                    <span class="decoration-year">2025</span>
+                    <span class="decoration-divider">/</span>
                     <span class="decoration-role">Senior Financial Analyst</span>
                 </div>
             </div>
@@ -154,8 +184,8 @@
 
             <p class="hero-description">
                 <span class="desc-line">Transformando <em>datos financieros</em> en</span>
-                <span class="desc-line"><em>decisiones estratégicas</em> mediante código,</span>
-                <span class="desc-line">automatización y análisis avanzado.</span>
+                <span class="desc-line"><em>decisiones estrategicas</em> mediante codigo,</span>
+                <span class="desc-line">automatizacion y analisis avanzado.</span>
             </p>
 
             <div class="hero-cta">
@@ -169,7 +199,9 @@
                 </a>
                 <a href="#projects" class="btn btn-outline magnetic">
                     <span class="btn-text">Ver Proyectos</span>
-                    <span class="btn-icon">↓</span>
+                    <span class="btn-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+                    </span>
                 </a>
             </div>
 
@@ -177,7 +209,7 @@
                 <div class="stat-item" data-scroll-reveal>
                     <span class="stat-number" data-value="7">0</span>
                     <span class="stat-plus">+</span>
-                    <span class="stat-label">Años de<br>Experiencia</span>
+                    <span class="stat-label">Anos de<br>Experiencia</span>
                 </div>
                 <div class="stat-divider"></div>
                 <div class="stat-item" data-scroll-reveal>
@@ -187,9 +219,9 @@
                 </div>
                 <div class="stat-divider"></div>
                 <div class="stat-item" data-scroll-reveal>
-                    <span class="stat-number" data-value="2">0</span>
-                    <span class="stat-plus">M+</span>
-                    <span class="stat-label">USD<br>Ahorrados</span>
+                    <span class="stat-number" data-value="50">0</span>
+                    <span class="stat-plus">+</span>
+                    <span class="stat-label">Procesos<br>Automatizados</span>
                 </div>
             </div>
         </div>
@@ -217,22 +249,44 @@
                 </div>
                 <h2 class="section-title massive-text">
                     <span class="title-mask"><span class="title-inner">Sobre</span></span>
-                    <span class="title-mask"><span class="title-inner gradient-text">Mí</span></span>
+                    <span class="title-mask"><span class="title-inner gradient-text">Mi</span></span>
                 </h2>
             </div>
 
             <div class="about-content">
+                <div class="about-profile" data-scroll-reveal>
+                    <div class="profile-image-wrapper">
+                        <div class="profile-image-container">
+                            <img src="img/profile.jpg" alt="Yeison Moreno" class="profile-image">
+                            <div class="profile-image-border"></div>
+                        </div>
+                        <div class="profile-decoration">
+                            <div class="deco-circle"></div>
+                            <div class="deco-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                        </div>
+                        <div class="profile-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                            <span>Verified Professional</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="about-main">
                     <div class="about-text-block" data-scroll-reveal>
                         <p class="text-large">
-                            Soy un <strong>Senior Financial Analyst</strong> con más de <em>7 años de experiencia</em>
+                            Soy un <strong>Senior Financial Analyst</strong> con mas de <em>7 anos de experiencia</em>
                             transformando la manera en que las empresas entienden y utilizan sus datos financieros.
                         </p>
                     </div>
                     <div class="about-text-block" data-scroll-reveal>
                         <p>
-                            Mi enfoque único combina el <span class="highlight-box">análisis financiero tradicional</span> con
-                            <span class="highlight-box">programación avanzada</span>, creando soluciones que automatizan procesos,
+                            Mi enfoque unico combina el <span class="highlight-box">analisis financiero tradicional</span> con
+                            <span class="highlight-box">programacion avanzada</span>, creando soluciones que automatizan procesos,
                             reducen errores y generan ahorros millonarios.
                         </p>
                     </div>
@@ -256,7 +310,7 @@
                             </svg>
                         </div>
                         <h3>Code</h3>
-                        <p>Python, SQL, VBA y herramientas de automatización para optimizar procesos financieros.</p>
+                        <p>Python, SQL, VBA y herramientas de automatizacion para optimizar procesos financieros.</p>
                         <div class="card-number">01</div>
                     </div>
                     <div class="about-card" data-scroll-reveal data-tilt>
@@ -266,7 +320,7 @@
                             </svg>
                         </div>
                         <h3>Finance</h3>
-                        <p>Modelado financiero, forecasting y reportería ejecutiva para decisiones estratégicas.</p>
+                        <p>Modelado financiero, forecasting y reporteria ejecutiva para decisiones estrategicas.</p>
                         <div class="card-number">02</div>
                     </div>
                     <div class="about-card" data-scroll-reveal data-tilt>
@@ -276,7 +330,7 @@
                             </svg>
                         </div>
                         <h3>Automation</h3>
-                        <p>Transformación de procesos manuales en flujos automatizados que ahorran tiempo y dinero.</p>
+                        <p>Transformacion de procesos manuales en flujos automatizados que ahorran tiempo y dinero.</p>
                         <div class="card-number">03</div>
                     </div>
                 </div>
@@ -299,7 +353,7 @@
             </div>
 
             <div class="projects-grid">
-                <!-- Project 1: FlightCost Optimizer (Aviation Pack) -->
+                <!-- Project 1: FlightCost Optimizer -->
                 <article class="project-card featured" data-scroll-reveal>
                     <div class="project-visual">
                         <div class="project-mockup">
@@ -319,15 +373,22 @@
                                     </div>
                                     <div class="mockup-stats">
                                         <div class="mini-stat">
-                                            <span class="mini-value">-$1.2M</span>
-                                            <span class="mini-label">Savings</span>
+                                            <span class="mini-value">Optimized</span>
+                                            <span class="mini-label">Costs</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="project-float-badge">
-                            <span class="badge-icon">✈️</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="badge-icon-svg">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                <polyline points="7.5 4.21 12 6.81 16.5 4.21"/>
+                                <polyline points="7.5 19.79 7.5 14.6 3 12"/>
+                                <polyline points="21 12 16.5 14.6 16.5 19.79"/>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                                <line x1="12" y1="22.08" x2="12" y2="12"/>
+                            </svg>
                             <span class="badge-text">Aviation</span>
                         </div>
                     </div>
@@ -338,18 +399,18 @@
                         </div>
                         <h3 class="project-title">FlightCost Optimizer</h3>
                         <p class="project-description">
-                            Sistema integral de optimización de costos para operaciones de aviación.
-                            Automatización del análisis de gastos operativos, combustible y mantenimiento
+                            Sistema integral de optimizacion de costos para operaciones de aviacion.
+                            Automatizacion del analisis de gastos operativos, combustible y mantenimiento
                             con dashboards en tiempo real y alertas predictivas.
                         </p>
                         <div class="project-impact">
                             <div class="impact-item">
-                                <span class="impact-value">$1.2M+</span>
-                                <span class="impact-label">Ahorro anual generado</span>
+                                <span class="impact-value">Alto Impacto</span>
+                                <span class="impact-label">Ahorros significativos</span>
                             </div>
                             <div class="impact-item">
-                                <span class="impact-value">85%</span>
-                                <span class="impact-label">Reducción tiempo de análisis</span>
+                                <span class="impact-value">Optimizado</span>
+                                <span class="impact-label">Tiempo de analisis</span>
                             </div>
                         </div>
                         <div class="project-tech">
@@ -361,7 +422,7 @@
                     </div>
                 </article>
 
-                <!-- Project 2: CollectFlow Pro (Core Collect) -->
+                <!-- Project 2: CollectFlow Pro -->
                 <article class="project-card featured" data-scroll-reveal>
                     <div class="project-visual">
                         <div class="project-mockup">
@@ -373,11 +434,17 @@
                                 </div>
                                 <div class="mockup-content">
                                     <div class="mockup-flow">
-                                        <div class="flow-node">📊</div>
+                                        <div class="flow-node">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                                        </div>
                                         <div class="flow-line"></div>
-                                        <div class="flow-node">⚡</div>
+                                        <div class="flow-node">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                                        </div>
                                         <div class="flow-line"></div>
-                                        <div class="flow-node">💰</div>
+                                        <div class="flow-node">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                        </div>
                                     </div>
                                     <div class="mockup-metrics">
                                         <div class="metric-ring">
@@ -392,7 +459,10 @@
                             </div>
                         </div>
                         <div class="project-float-badge">
-                            <span class="badge-icon">💳</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="badge-icon-svg">
+                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                                <line x1="1" y1="10" x2="23" y2="10"/>
+                            </svg>
                             <span class="badge-text">Collections</span>
                         </div>
                     </div>
@@ -403,18 +473,18 @@
                         </div>
                         <h3 class="project-title">CollectFlow Pro</h3>
                         <p class="project-description">
-                            Plataforma de gestión y automatización del proceso de cobranza.
-                            Integración de múltiples fuentes de datos, scoring de clientes,
-                            y generación automática de estrategias de recuperación personalizadas.
+                            Plataforma de gestion y automatizacion del proceso de cobranza.
+                            Integracion de multiples fuentes de datos, scoring de clientes,
+                            y generacion automatica de estrategias de recuperacion personalizadas.
                         </p>
                         <div class="project-impact">
                             <div class="impact-item">
-                                <span class="impact-value">$800K+</span>
-                                <span class="impact-label">Recuperación adicional</span>
+                                <span class="impact-value">Excepcional</span>
+                                <span class="impact-label">Recuperacion de cartera</span>
                             </div>
                             <div class="impact-item">
-                                <span class="impact-value">60%</span>
-                                <span class="impact-label">Mejora en eficiencia</span>
+                                <span class="impact-value">Automatizado</span>
+                                <span class="impact-label">Proceso end-to-end</span>
                             </div>
                         </div>
                         <div class="project-tech">
@@ -435,11 +505,11 @@
                         </div>
                         <h3 class="project-title">DataBridge Analytics</h3>
                         <p class="project-description">
-                            Pipeline de integración de datos multi-fuente para consolidación financiera
-                            y reportería automatizada a nivel ejecutivo.
+                            Pipeline de integracion de datos multi-fuente para consolidacion financiera
+                            y reporteria automatizada a nivel ejecutivo.
                         </p>
                         <div class="project-impact-inline">
-                            <span><strong>40%</strong> reducción en tiempo de cierre</span>
+                            <span><strong>40%</strong> reduccion en tiempo de cierre</span>
                         </div>
                         <div class="project-tech">
                             <span class="tech-tag">Databricks</span>
@@ -458,11 +528,11 @@
                         </div>
                         <h3 class="project-title">ForecastEngine</h3>
                         <p class="project-description">
-                            Motor de pronóstico financiero con machine learning para proyecciones
-                            de revenue, costos y flujo de caja con precisión mejorada.
+                            Motor de pronostico financiero con machine learning para proyecciones
+                            de revenue, costos y flujo de caja con precision mejorada.
                         </p>
                         <div class="project-impact-inline">
-                            <span><strong>92%</strong> precisión en forecasts</span>
+                            <span><strong>92%</strong> precision en forecasts</span>
                         </div>
                         <div class="project-tech">
                             <span class="tech-tag">Python</span>
@@ -474,7 +544,7 @@
             </div>
 
             <div class="projects-cta" data-scroll-reveal>
-                <p>¿Interesado en conocer más sobre estos proyectos?</p>
+                <p>Interesado en conocer mas sobre estos proyectos?</p>
                 <a href="https://www.linkedin.com/in/yeison-moreno-rivera-375833b1/" target="_blank" class="btn btn-linkedin magnetic">
                     <span class="btn-bg"></span>
                     <span class="btn-content">
@@ -503,7 +573,9 @@
             <div class="skills-showcase">
                 <div class="skills-category" data-scroll-reveal>
                     <h3 class="category-name">
-                        <span class="category-icon">⚡</span>
+                        <span class="category-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                        </span>
                         Programming
                     </h3>
                     <div class="skills-list">
@@ -539,7 +611,9 @@
 
                 <div class="skills-category" data-scroll-reveal>
                     <h3 class="category-name">
-                        <span class="category-icon">📊</span>
+                        <span class="category-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                        </span>
                         Data & Analytics
                     </h3>
                     <div class="skills-list">
@@ -575,7 +649,9 @@
 
                 <div class="skills-category" data-scroll-reveal>
                     <h3 class="category-name">
-                        <span class="category-icon">🤖</span>
+                        <span class="category-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                        </span>
                         AI & Automation
                     </h3>
                     <div class="skills-list">
@@ -605,24 +681,24 @@
         <div class="skills-marquee">
             <div class="marquee-track">
                 <div class="marquee-content">
-                    <span>PYTHON</span><span class="marquee-dot">◆</span>
-                    <span>SQL</span><span class="marquee-dot">◆</span>
-                    <span>DATABRICKS</span><span class="marquee-dot">◆</span>
-                    <span>POWER BI</span><span class="marquee-dot">◆</span>
-                    <span>EXCEL</span><span class="marquee-dot">◆</span>
-                    <span>VBA</span><span class="marquee-dot">◆</span>
-                    <span>CHATGPT</span><span class="marquee-dot">◆</span>
-                    <span>AUTOMATION</span><span class="marquee-dot">◆</span>
+                    <span>PYTHON</span><span class="marquee-dot"></span>
+                    <span>SQL</span><span class="marquee-dot"></span>
+                    <span>DATABRICKS</span><span class="marquee-dot"></span>
+                    <span>POWER BI</span><span class="marquee-dot"></span>
+                    <span>EXCEL</span><span class="marquee-dot"></span>
+                    <span>VBA</span><span class="marquee-dot"></span>
+                    <span>AI TOOLS</span><span class="marquee-dot"></span>
+                    <span>AUTOMATION</span><span class="marquee-dot"></span>
                 </div>
                 <div class="marquee-content" aria-hidden="true">
-                    <span>PYTHON</span><span class="marquee-dot">◆</span>
-                    <span>SQL</span><span class="marquee-dot">◆</span>
-                    <span>DATABRICKS</span><span class="marquee-dot">◆</span>
-                    <span>POWER BI</span><span class="marquee-dot">◆</span>
-                    <span>EXCEL</span><span class="marquee-dot">◆</span>
-                    <span>VBA</span><span class="marquee-dot">◆</span>
-                    <span>CHATGPT</span><span class="marquee-dot">◆</span>
-                    <span>AUTOMATION</span><span class="marquee-dot">◆</span>
+                    <span>PYTHON</span><span class="marquee-dot"></span>
+                    <span>SQL</span><span class="marquee-dot"></span>
+                    <span>DATABRICKS</span><span class="marquee-dot"></span>
+                    <span>POWER BI</span><span class="marquee-dot"></span>
+                    <span>EXCEL</span><span class="marquee-dot"></span>
+                    <span>VBA</span><span class="marquee-dot"></span>
+                    <span>AI TOOLS</span><span class="marquee-dot"></span>
+                    <span>AUTOMATION</span><span class="marquee-dot"></span>
                 </div>
             </div>
         </div>
@@ -646,7 +722,9 @@
                     <!-- Python -->
                     <div class="cert-card" data-scroll-reveal>
                         <div class="cert-content">
-                            <div class="cert-icon">🐍</div>
+                            <div class="cert-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                            </div>
                             <h3 class="cert-name">Python</h3>
                             <p class="cert-issuer">Platzi</p>
                             <ul class="cert-skills">
@@ -664,7 +742,9 @@
                     <!-- Databricks -->
                     <div class="cert-card" data-scroll-reveal>
                         <div class="cert-content">
-                            <div class="cert-icon">🔥</div>
+                            <div class="cert-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                            </div>
                             <h3 class="cert-name">Databricks</h3>
                             <p class="cert-issuer">Databricks Academy</p>
                             <ul class="cert-skills">
@@ -682,7 +762,9 @@
                     <!-- Databricks SQL -->
                     <div class="cert-card" data-scroll-reveal>
                         <div class="cert-content">
-                            <div class="cert-icon">📊</div>
+                            <div class="cert-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                            </div>
                             <h3 class="cert-name">Databricks SQL</h3>
                             <p class="cert-issuer">Databricks Academy</p>
                             <ul class="cert-skills">
@@ -700,7 +782,9 @@
                     <!-- Bases de Datos -->
                     <div class="cert-card" data-scroll-reveal>
                         <div class="cert-content">
-                            <div class="cert-icon">🗄️</div>
+                            <div class="cert-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
+                            </div>
                             <h3 class="cert-name">Bases de Datos</h3>
                             <p class="cert-issuer">Platzi</p>
                             <ul class="cert-skills">
@@ -718,7 +802,9 @@
                     <!-- Excel -->
                     <div class="cert-card" data-scroll-reveal>
                         <div class="cert-content">
-                            <div class="cert-icon">📈</div>
+                            <div class="cert-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>
+                            </div>
                             <h3 class="cert-name">Excel Avanzado</h3>
                             <p class="cert-issuer">Platzi</p>
                             <ul class="cert-skills">
@@ -736,7 +822,9 @@
                     <!-- ChatGPT -->
                     <div class="cert-card" data-scroll-reveal>
                         <div class="cert-content">
-                            <div class="cert-icon">🤖</div>
+                            <div class="cert-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                            </div>
                             <h3 class="cert-name">ChatGPT</h3>
                             <p class="cert-issuer">Platzi</p>
                             <ul class="cert-skills">
@@ -754,8 +842,10 @@
                     <!-- Power BI -->
                     <div class="cert-card" data-scroll-reveal>
                         <div class="cert-content">
-                            <div class="cert-icon">📉</div>
-                            <h3 class="cert-name">Visualización BI</h3>
+                            <div class="cert-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                            </div>
+                            <h3 class="cert-name">Visualizacion BI</h3>
                             <p class="cert-issuer">Platzi</p>
                             <ul class="cert-skills">
                                 <li>Interactive Dashboards</li>
@@ -769,11 +859,13 @@
                         </div>
                     </div>
 
-                    <!-- Negociación -->
+                    <!-- Negociacion -->
                     <div class="cert-card" data-scroll-reveal>
                         <div class="cert-content">
-                            <div class="cert-icon">🤝</div>
-                            <h3 class="cert-name">Negociación B2B</h3>
+                            <div class="cert-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            </div>
+                            <h3 class="cert-name">Negociacion B2B</h3>
                             <p class="cert-issuer">Platzi</p>
                             <ul class="cert-skills">
                                 <li>Negotiation Strategies</li>
@@ -790,7 +882,9 @@
                     <!-- Databricks Certified -->
                     <div class="cert-card premium" data-scroll-reveal>
                         <div class="cert-content">
-                            <div class="cert-icon">⭐</div>
+                            <div class="cert-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            </div>
                             <h3 class="cert-name">Databricks Certified</h3>
                             <p class="cert-issuer">Databricks</p>
                             <ul class="cert-skills">
@@ -815,7 +909,7 @@
         <div class="container">
             <div class="contact-wrapper">
                 <div class="contact-header" data-scroll-reveal>
-                    <span class="contact-label">¿Listo para colaborar?</span>
+                    <span class="contact-label">Listo para colaborar?</span>
                     <h2 class="contact-title massive-text">
                         <span class="title-mask"><span class="title-inner">Let's</span></span>
                         <span class="title-mask"><span class="title-inner gradient-text">Connect</span></span>
@@ -827,7 +921,7 @@
                         <p class="contact-description">
                             Estoy abierto a nuevas oportunidades y colaboraciones.
                             Si tienes un proyecto donde crees que puedo agregar valor,
-                            ¡hablemos!
+                            hablemos!
                         </p>
 
                         <div class="contact-links">
@@ -868,7 +962,10 @@
                                 </div>
                                 <h3>Yeison Moreno</h3>
                                 <p>Senior Financial Analyst</p>
-                                <p class="location">📍 Colombia</p>
+                                <p class="location">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="location-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                    Colombia
+                                </p>
                                 <div class="card-decoration">
                                     <span class="deco-text">CODE + FINANCE</span>
                                 </div>
@@ -891,7 +988,7 @@
                     <p>Code + Finance</p>
                 </div>
                 <div class="footer-links">
-                    <a href="#about">Sobre Mí</a>
+                    <a href="#about">Sobre Mi</a>
                     <a href="#projects">Proyectos</a>
                     <a href="#skills">Skills</a>
                     <a href="#certificates">Certificados</a>
@@ -906,7 +1003,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2025 Yeison Moreno. Built with passion.</p>
+                <p>2025 Yeison Moreno. Built with passion.</p>
                 <p class="footer-credits">Designed & Developed with GSAP</p>
             </div>
         </div>

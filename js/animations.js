@@ -1,9 +1,63 @@
 /* ==========================================
    YEISON MORENO - EPIC ANIMATIONS 2025
    GSAP + Lenis + ScrollTrigger Pro Level
+   Theme Toggle + Interactive Scroll
    ========================================== */
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+// ==========================================
+// THEME TOGGLE SYSTEM
+// ==========================================
+function initTheme() {
+    const toggle = document.getElementById('theme-toggle');
+    const mobileToggle = document.getElementById('mobile-theme-toggle');
+    const html = document.documentElement;
+
+    // Check for saved theme or system preference
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme) {
+        html.setAttribute('data-theme', savedTheme);
+    } else if (!systemPrefersDark) {
+        html.setAttribute('data-theme', 'light');
+    }
+
+    function toggleTheme() {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        // Animate transition
+        gsap.to('body', {
+            opacity: 0.8,
+            duration: 0.15,
+            onComplete: () => {
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                gsap.to('body', {
+                    opacity: 1,
+                    duration: 0.15
+                });
+            }
+        });
+    }
+
+    if (toggle) {
+        toggle.addEventListener('click', toggleTheme);
+    }
+
+    if (mobileToggle) {
+        mobileToggle.addEventListener('click', toggleTheme);
+    }
+
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+            html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        }
+    });
+}
 
 // ==========================================
 // LENIS SMOOTH SCROLL
@@ -54,6 +108,7 @@ function initLoader() {
                     loader.style.display = 'none';
                     initHeroAnimations();
                     initScrollAnimations();
+                    initInteractiveScrollEffects();
                 }
             });
         }
@@ -212,6 +267,44 @@ function initScrollAnimations() {
         });
     });
 
+    // Profile image animation
+    const profileWrapper = document.querySelector('.about-profile');
+    if (profileWrapper) {
+        gsap.to(profileWrapper, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: profileWrapper,
+                start: 'top 85%',
+            }
+        });
+
+        // Profile image hover glow effect
+        const profileContainer = document.querySelector('.profile-image-container');
+        if (profileContainer) {
+            profileContainer.addEventListener('mouseenter', () => {
+                gsap.to('.profile-image-border', {
+                    opacity: 1,
+                    scale: 1.05,
+                    duration: 0.4,
+                    ease: 'power2.out'
+                });
+            });
+
+            profileContainer.addEventListener('mouseleave', () => {
+                gsap.to('.profile-image-border', {
+                    opacity: 0.7,
+                    scale: 1,
+                    duration: 0.4,
+                    ease: 'power2.out'
+                });
+            });
+        }
+    }
+
     // Project cards
     gsap.utils.toArray('.project-card').forEach((card, i) => {
         gsap.to(card, {
@@ -341,6 +434,175 @@ function initScrollAnimations() {
 }
 
 // ==========================================
+// INTERACTIVE SCROLL EFFECTS
+// ==========================================
+function initInteractiveScrollEffects() {
+    // Horizontal scroll text effect
+    const scrollTexts = document.querySelectorAll('.scroll-text');
+    scrollTexts.forEach((text, i) => {
+        gsap.to(text, {
+            xPercent: i % 2 === 0 ? -20 : 20,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: text,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1
+            }
+        });
+    });
+
+    // Scale on scroll for sections
+    gsap.utils.toArray('section').forEach(section => {
+        gsap.fromTo(section,
+            { scale: 0.95, opacity: 0.8 },
+            {
+                scale: 1,
+                opacity: 1,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 90%',
+                    end: 'top 50%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // Parallax for project mockups
+    gsap.utils.toArray('.project-mockup').forEach(mockup => {
+        gsap.to(mockup, {
+            y: -30,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: mockup,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 2
+            }
+        });
+    });
+
+    // Stagger reveal for skill items
+    gsap.utils.toArray('.skill-item').forEach((item, i) => {
+        gsap.fromTo(item,
+            { opacity: 0, x: -30, rotateY: -15 },
+            {
+                opacity: 1,
+                x: 0,
+                rotateY: 0,
+                duration: 0.6,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 90%'
+                },
+                delay: (i % 5) * 0.1
+            }
+        );
+    });
+
+    // Floating animation for decorative elements
+    gsap.utils.toArray('.profile-decoration, .hero-title-decoration').forEach(el => {
+        gsap.to(el, {
+            y: -15,
+            duration: 2,
+            ease: 'sine.inOut',
+            yoyo: true,
+            repeat: -1
+        });
+    });
+
+    // Text reveal on scroll
+    gsap.utils.toArray('.about-text p, .project-description').forEach(text => {
+        gsap.fromTo(text,
+            { opacity: 0, y: 30 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: text,
+                    start: 'top 85%'
+                }
+            }
+        );
+    });
+
+    // Counter animation on scroll for visible stats
+    gsap.utils.toArray('.stat-number').forEach(stat => {
+        if (!stat.closest('.hero-stats')) {
+            const value = parseInt(stat.dataset.value);
+            if (value) {
+                ScrollTrigger.create({
+                    trigger: stat,
+                    start: 'top 85%',
+                    once: true,
+                    onEnter: () => {
+                        gsap.to(stat, {
+                            textContent: value,
+                            duration: 2,
+                            ease: 'power2.out',
+                            snap: { textContent: 1 }
+                        });
+                    }
+                });
+            }
+        }
+    });
+
+    // Card 3D rotation on scroll
+    gsap.utils.toArray('.cert-card, .about-card').forEach(card => {
+        gsap.fromTo(card,
+            { rotateX: 15, transformPerspective: 1000 },
+            {
+                rotateX: 0,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 90%',
+                    end: 'top 60%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // Progress indicator based on scroll
+    initScrollProgress();
+}
+
+// ==========================================
+// SCROLL PROGRESS INDICATOR
+// ==========================================
+function initScrollProgress() {
+    // Create progress bar if not exists
+    let progressBar = document.querySelector('.scroll-progress');
+    if (!progressBar) {
+        progressBar = document.createElement('div');
+        progressBar.className = 'scroll-progress';
+        progressBar.innerHTML = '<div class="scroll-progress-bar"></div>';
+        document.body.appendChild(progressBar);
+    }
+
+    const progressBarInner = document.querySelector('.scroll-progress-bar');
+
+    gsap.to(progressBarInner, {
+        scaleX: 1,
+        ease: 'none',
+        scrollTrigger: {
+            trigger: document.body,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 0.3
+        }
+    });
+}
+
+// ==========================================
 // MAGNETIC EFFECT
 // ==========================================
 function initMagneticEffect() {
@@ -409,6 +671,55 @@ function initTiltEffect() {
 }
 
 // ==========================================
+// CURSOR FOLLOWER (Enhanced Interaction)
+// ==========================================
+function initCursorFollower() {
+    // Only on non-touch devices
+    if ('ontouchstart' in window) return;
+
+    const cursor = document.createElement('div');
+    cursor.className = 'cursor-follower';
+    cursor.innerHTML = '<div class="cursor-dot"></div><div class="cursor-ring"></div>';
+    document.body.appendChild(cursor);
+
+    const dot = cursor.querySelector('.cursor-dot');
+    const ring = cursor.querySelector('.cursor-ring');
+
+    let mouseX = 0, mouseY = 0;
+    let dotX = 0, dotY = 0;
+    let ringX = 0, ringY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    gsap.ticker.add(() => {
+        dotX += (mouseX - dotX) * 0.2;
+        dotY += (mouseY - dotY) * 0.2;
+        ringX += (mouseX - ringX) * 0.1;
+        ringY += (mouseY - ringY) * 0.1;
+
+        gsap.set(dot, { x: dotX, y: dotY });
+        gsap.set(ring, { x: ringX, y: ringY });
+    });
+
+    // Scale cursor on interactive elements
+    const interactiveElements = document.querySelectorAll('a, button, .project-card, .cert-card, .about-card');
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            gsap.to(ring, { scale: 1.5, opacity: 0.5, duration: 0.3 });
+            gsap.to(dot, { scale: 0.5, duration: 0.3 });
+        });
+
+        el.addEventListener('mouseleave', () => {
+            gsap.to(ring, { scale: 1, opacity: 1, duration: 0.3 });
+            gsap.to(dot, { scale: 1, duration: 0.3 });
+        });
+    });
+}
+
+// ==========================================
 // SMOOTH SCROLL NAVIGATION
 // ==========================================
 function initSmoothNav() {
@@ -431,14 +742,32 @@ function initSmoothNav() {
 }
 
 // ==========================================
+// MOBILE MENU
+// ==========================================
+function initMobileMenu() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+    }
+}
+
+// ==========================================
 // INITIALIZE
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
     initLenis();
     initLoader();
     initMagneticEffect();
     initTiltEffect();
     initSmoothNav();
+    initMobileMenu();
+    initCursorFollower();
 });
 
 // Refresh on resize
