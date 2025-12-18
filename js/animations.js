@@ -778,83 +778,238 @@ function initKonamiCode() {
 }
 
 function triggerEasterEgg() {
-    // Create confetti
+    // Create confetti and sunflowers
     createConfetti();
+    createSunflowers();
 
     // Create love message
     const loveMessage = document.createElement('div');
     loveMessage.className = 'love-message';
     loveMessage.innerHTML = `
         <div class="love-content">
+            <div class="sunflower-row">
+                <span class="sunflower">&#127803;</span>
+                <span class="sunflower">&#127803;</span>
+                <span class="sunflower">&#127803;</span>
+            </div>
             <div class="love-hearts">
                 <span class="heart">&#10084;</span>
                 <span class="heart">&#10084;</span>
                 <span class="heart">&#10084;</span>
             </div>
-            <h1 class="love-text">CAMILA TE AMO</h1>
-            <p class="love-subtitle">Este portfolio fue hecho con amor para ti</p>
+            <h1 class="love-text">
+                <span class="love-letter">C</span>
+                <span class="love-letter">A</span>
+                <span class="love-letter">M</span>
+                <span class="love-letter">I</span>
+                <span class="love-letter">L</span>
+                <span class="love-letter">A</span>
+                <span class="love-letter love-space"></span>
+                <span class="love-letter">T</span>
+                <span class="love-letter">E</span>
+                <span class="love-letter love-space"></span>
+                <span class="love-letter">A</span>
+                <span class="love-letter">M</span>
+                <span class="love-letter">O</span>
+            </h1>
             <div class="love-hearts">
                 <span class="heart">&#10084;</span>
                 <span class="heart">&#10084;</span>
                 <span class="heart">&#10084;</span>
+            </div>
+            <div class="sunflower-row">
+                <span class="sunflower">&#127803;</span>
+                <span class="sunflower">&#127803;</span>
+                <span class="sunflower">&#127803;</span>
             </div>
         </div>
+        <div class="floating-sunflowers"></div>
     `;
     document.body.appendChild(loveMessage);
 
-    // Animate message
+    // Create floating sunflowers around the screen
+    const floatingContainer = loveMessage.querySelector('.floating-sunflowers');
+    for (let i = 0; i < 12; i++) {
+        const floatingSunflower = document.createElement('span');
+        floatingSunflower.className = 'floating-sunflower';
+        floatingSunflower.innerHTML = '&#127803;';
+        floatingSunflower.style.cssText = `
+            position: absolute;
+            font-size: ${Math.random() * 30 + 20}px;
+            left: ${Math.random() * 100}%;
+            top: ${Math.random() * 100}%;
+            opacity: 0;
+        `;
+        floatingContainer.appendChild(floatingSunflower);
+    }
+
+    // Animate message entrance
     gsap.fromTo(loveMessage,
         { opacity: 0 },
         { opacity: 1, duration: 0.5 }
     );
 
-    gsap.fromTo('.love-text',
-        { scale: 0, rotation: -10 },
-        { scale: 1, rotation: 0, duration: 0.8, ease: 'elastic.out(1, 0.5)', delay: 0.3 }
+    // Animate each letter with wave effect
+    gsap.fromTo('.love-letter',
+        {
+            opacity: 0,
+            y: 100,
+            rotationX: -90,
+            scale: 0
+        },
+        {
+            opacity: 1,
+            y: 0,
+            rotationX: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: 'back.out(1.7)',
+            stagger: 0.08,
+            delay: 0.3
+        }
     );
 
-    gsap.fromTo('.love-subtitle',
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, delay: 0.6 }
-    );
+    // Continuous wave animation on letters
+    gsap.to('.love-letter', {
+        y: -15,
+        duration: 0.6,
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1,
+        stagger: {
+            each: 0.1,
+            repeat: -1
+        },
+        delay: 1.5
+    });
 
+    // Hearts animation
     gsap.fromTo('.heart',
-        { scale: 0 },
-        { scale: 1, duration: 0.5, stagger: 0.1, ease: 'back.out(1.7)', delay: 0.2 }
+        { scale: 0, rotation: -180 },
+        { scale: 1, rotation: 0, duration: 0.6, stagger: 0.1, ease: 'back.out(2)', delay: 0.2 }
     );
 
     // Pulse hearts animation
     gsap.to('.heart', {
-        scale: 1.2,
-        duration: 0.5,
+        scale: 1.3,
+        duration: 0.4,
         yoyo: true,
         repeat: -1,
         ease: 'sine.inOut',
-        stagger: 0.15,
+        stagger: 0.1,
         delay: 1
+    });
+
+    // Sunflower row animation
+    gsap.fromTo('.sunflower',
+        { scale: 0, rotation: -360 },
+        { scale: 1, rotation: 0, duration: 0.8, stagger: 0.15, ease: 'elastic.out(1, 0.5)', delay: 0.1 }
+    );
+
+    // Sunflower gentle rotation
+    gsap.to('.sunflower', {
+        rotation: 15,
+        duration: 2,
+        yoyo: true,
+        repeat: -1,
+        ease: 'sine.inOut',
+        stagger: 0.2,
+        delay: 1
+    });
+
+    // Floating sunflowers animation
+    gsap.fromTo('.floating-sunflower',
+        { opacity: 0, scale: 0 },
+        {
+            opacity: 0.7,
+            scale: 1,
+            duration: 1,
+            stagger: 0.15,
+            ease: 'back.out(1.7)',
+            delay: 0.5
+        }
+    );
+
+    // Make floating sunflowers drift
+    document.querySelectorAll('.floating-sunflower').forEach((sf, i) => {
+        gsap.to(sf, {
+            x: (Math.random() - 0.5) * 100,
+            y: (Math.random() - 0.5) * 100,
+            rotation: Math.random() * 360,
+            duration: 3 + Math.random() * 2,
+            ease: 'sine.inOut',
+            yoyo: true,
+            repeat: -1,
+            delay: i * 0.1
+        });
     });
 
     // Close on click
     loveMessage.addEventListener('click', () => {
+        gsap.to('.love-letter', {
+            y: -50,
+            opacity: 0,
+            stagger: 0.03,
+            duration: 0.3,
+            ease: 'power2.in'
+        });
         gsap.to(loveMessage, {
             opacity: 0,
-            scale: 0.8,
-            duration: 0.4,
+            scale: 1.1,
+            duration: 0.5,
+            delay: 0.3,
             onComplete: () => loveMessage.remove()
         });
     });
 
-    // Auto close after 8 seconds
+    // Auto close after 10 seconds
     setTimeout(() => {
         if (document.body.contains(loveMessage)) {
+            gsap.to('.love-letter', {
+                y: -50,
+                opacity: 0,
+                stagger: 0.03,
+                duration: 0.3,
+                ease: 'power2.in'
+            });
             gsap.to(loveMessage, {
                 opacity: 0,
-                scale: 0.8,
-                duration: 0.4,
+                scale: 1.1,
+                duration: 0.5,
+                delay: 0.3,
                 onComplete: () => loveMessage.remove()
             });
         }
-    }, 8000);
+    }, 10000);
+}
+
+function createSunflowers() {
+    const sunflowerCount = 20;
+
+    for (let i = 0; i < sunflowerCount; i++) {
+        const sunflower = document.createElement('div');
+        sunflower.className = 'falling-sunflower';
+        sunflower.innerHTML = '&#127803;';
+        sunflower.style.cssText = `
+            position: fixed;
+            font-size: ${Math.random() * 40 + 25}px;
+            left: ${Math.random() * 100}vw;
+            top: -60px;
+            z-index: 100001;
+            pointer-events: none;
+        `;
+        document.body.appendChild(sunflower);
+
+        gsap.to(sunflower, {
+            y: window.innerHeight + 100,
+            x: (Math.random() - 0.5) * 300,
+            rotation: Math.random() * 720 - 360,
+            duration: Math.random() * 4 + 3,
+            ease: 'power1.out',
+            delay: Math.random() * 2,
+            onComplete: () => sunflower.remove()
+        });
+    }
 }
 
 function createConfetti() {

@@ -2547,9 +2547,21 @@ h1, h2, h3, h4, h5, h6, p, span, a, li {
 .love-content {
     text-align: center;
     padding: 3rem;
+    position: relative;
+    z-index: 2;
 }
 
 .love-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.1em;
+    margin: 1.5rem 0;
+    perspective: 1000px;
+}
+
+.love-letter {
     font-size: clamp(3rem, 12vw, 8rem);
     font-weight: 800;
     background: linear-gradient(135deg, #ff6b6b, #ff8e8e, #ffd93d, #ff6b6b);
@@ -2558,21 +2570,18 @@ h1, h2, h3, h4, h5, h6, p, span, a, li {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     animation: loveGradient 3s ease infinite;
-    text-shadow: 0 0 80px rgba(255, 107, 107, 0.5);
-    margin: 1rem 0;
-    letter-spacing: -0.02em;
+    display: inline-block;
+    filter: drop-shadow(0 0 30px rgba(255, 107, 107, 0.6));
+    transform-style: preserve-3d;
+}
+
+.love-letter.love-space {
+    width: 0.3em;
 }
 
 @keyframes loveGradient {
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
-}
-
-.love-subtitle {
-    font-size: clamp(1rem, 3vw, 1.5rem);
-    color: rgba(255, 255, 255, 0.8);
-    margin-top: 1rem;
-    font-weight: 300;
 }
 
 .love-hearts {
@@ -2587,6 +2596,39 @@ h1, h2, h3, h4, h5, h6, p, span, a, li {
     color: #ff6b6b;
     display: inline-block;
     filter: drop-shadow(0 0 20px rgba(255, 107, 107, 0.8));
+}
+
+/* Sunflower styles */
+.sunflower-row {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1rem 0;
+}
+
+.sunflower {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    display: inline-block;
+    filter: drop-shadow(0 0 15px rgba(255, 193, 7, 0.6));
+}
+
+.floating-sunflowers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.floating-sunflower {
+    filter: drop-shadow(0 0 10px rgba(255, 193, 7, 0.5));
+}
+
+.falling-sunflower {
+    will-change: transform;
+    filter: drop-shadow(0 0 15px rgba(255, 193, 7, 0.6));
 }
 
 /* Confetti base styles */
