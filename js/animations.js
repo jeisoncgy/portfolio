@@ -757,6 +757,139 @@ function initMobileMenu() {
 }
 
 // ==========================================
+// KONAMI CODE EASTER EGG - CAMILATEAMO
+// ==========================================
+function initKonamiCode() {
+    const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+    let konamiIndex = 0;
+
+    document.addEventListener('keydown', (e) => {
+        if (e.code === konamiCode[konamiIndex]) {
+            konamiIndex++;
+
+            if (konamiIndex === konamiCode.length) {
+                triggerEasterEgg();
+                konamiIndex = 0;
+            }
+        } else {
+            konamiIndex = 0;
+        }
+    });
+}
+
+function triggerEasterEgg() {
+    // Create confetti
+    createConfetti();
+
+    // Create love message
+    const loveMessage = document.createElement('div');
+    loveMessage.className = 'love-message';
+    loveMessage.innerHTML = `
+        <div class="love-content">
+            <div class="love-hearts">
+                <span class="heart">&#10084;</span>
+                <span class="heart">&#10084;</span>
+                <span class="heart">&#10084;</span>
+            </div>
+            <h1 class="love-text">CAMILA TE AMO</h1>
+            <p class="love-subtitle">Este portfolio fue hecho con amor para ti</p>
+            <div class="love-hearts">
+                <span class="heart">&#10084;</span>
+                <span class="heart">&#10084;</span>
+                <span class="heart">&#10084;</span>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(loveMessage);
+
+    // Animate message
+    gsap.fromTo(loveMessage,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.5 }
+    );
+
+    gsap.fromTo('.love-text',
+        { scale: 0, rotation: -10 },
+        { scale: 1, rotation: 0, duration: 0.8, ease: 'elastic.out(1, 0.5)', delay: 0.3 }
+    );
+
+    gsap.fromTo('.love-subtitle',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, delay: 0.6 }
+    );
+
+    gsap.fromTo('.heart',
+        { scale: 0 },
+        { scale: 1, duration: 0.5, stagger: 0.1, ease: 'back.out(1.7)', delay: 0.2 }
+    );
+
+    // Pulse hearts animation
+    gsap.to('.heart', {
+        scale: 1.2,
+        duration: 0.5,
+        yoyo: true,
+        repeat: -1,
+        ease: 'sine.inOut',
+        stagger: 0.15,
+        delay: 1
+    });
+
+    // Close on click
+    loveMessage.addEventListener('click', () => {
+        gsap.to(loveMessage, {
+            opacity: 0,
+            scale: 0.8,
+            duration: 0.4,
+            onComplete: () => loveMessage.remove()
+        });
+    });
+
+    // Auto close after 8 seconds
+    setTimeout(() => {
+        if (document.body.contains(loveMessage)) {
+            gsap.to(loveMessage, {
+                opacity: 0,
+                scale: 0.8,
+                duration: 0.4,
+                onComplete: () => loveMessage.remove()
+            });
+        }
+    }, 8000);
+}
+
+function createConfetti() {
+    const colors = ['#ff6b6b', '#ff8e8e', '#ffa8a8', '#ff4757', '#ff6348', '#ffd93d', '#6c5ce7', '#a29bfe', '#fd79a8', '#f8b500'];
+    const confettiCount = 150;
+
+    for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.cssText = `
+            position: fixed;
+            width: ${Math.random() * 10 + 5}px;
+            height: ${Math.random() * 10 + 5}px;
+            background: ${colors[Math.floor(Math.random() * colors.length)]};
+            left: ${Math.random() * 100}vw;
+            top: -20px;
+            border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
+            z-index: 100001;
+            pointer-events: none;
+        `;
+        document.body.appendChild(confetti);
+
+        gsap.to(confetti, {
+            y: window.innerHeight + 100,
+            x: (Math.random() - 0.5) * 200,
+            rotation: Math.random() * 720 - 360,
+            duration: Math.random() * 3 + 2,
+            ease: 'power1.out',
+            delay: Math.random() * 0.5,
+            onComplete: () => confetti.remove()
+        });
+    }
+}
+
+// ==========================================
 // INITIALIZE
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -768,6 +901,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothNav();
     initMobileMenu();
     initCursorFollower();
+    initKonamiCode();
 });
 
 // Refresh on resize
